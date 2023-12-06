@@ -60,6 +60,54 @@ const anamneseData = {
       { label: "10 dias após o teste", result: "Continue monitorando sua saúde." },
     ],
   },
+
+  // AEDES
+  aedes: {
+    question: "Sentiu febre nos últimos dias?",
+    options: [
+      { label: "Sim", 
+      next: "aedesFeverPositive" 
+      },
+      { label: "Não", result: "Provavelmente você não foi contaminado com nenhuma doença transmitida pelo AEDES. Continue monitorando sua saúde" },
+    ],
+  },
+
+  aedesFeverPositive: {
+  question: "Qual a intensidade de febre você sentiu?",
+    options: [
+      { 
+        label: "Baixa.", 
+        next: "Provavelmente você não foi contaminado com nenhuma doença transmitida pelo AEDES. Continue monitorando sua saúde." 
+      },
+      {
+        label: "Moderada.",
+        next: "zika",
+      },
+      {
+        label: "Alta.",
+        next: "dengueOrChikungunya",
+      },
+    ],
+  },
+
+  dengueOrChikungunya: {
+    question: "Sentiu dores?",
+      options: [
+        { 
+          label: "Sim, senti dor atrás dos olhos", 
+          result: "Você pode ter sido contaminado com Dengue. Procure uma Unidade de Saúde" 
+        },
+        {
+          label: "Sim, sinto dores articulares intensas há meses",
+          result: "Você pode ter sido contaminado com Chikungunya. Procure uma Unidade de Saúde",
+        },
+        {
+          label: "Não senti dores",
+          result: "Continue monitorando sua saúde.",
+        },
+      ],
+    }
+
 };
 
 let currentQuestion;
