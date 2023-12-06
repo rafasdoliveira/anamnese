@@ -31,4 +31,17 @@ body {
     background: rgb(0,140,255);
   }
 
+  .back-index{
+    width: 300px;
+    padding: 10px 20px;
+    margin: 0.3rem;
+    border: none;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgb(255, 165, 0);
+  }
+
 

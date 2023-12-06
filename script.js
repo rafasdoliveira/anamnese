@@ -1,52 +1,65 @@
 const anamneseData = {
   
-  // CORAÇÃO
-  coracao: {
-    question: "Você está experimentando algum desconforto no peito?",
-    options: [
-      { label: "Sim", next: "question2" },
-      { label: "Não", result: "Se você não está experimentando desconforto no peito, é possível que não haja uma emergência cardíaca. Consulte um médico para uma avaliação completa." }
-    ]
-  },
-  question2: {
-    question: "A dor no peito irradia para o braço esquerdo?",
-    options: [
-      { label: "Sim", result: "Isso pode ser um sintoma de problemas cardíacos. Recomenda-se procurar ajuda médica imediatamente." },
-      { label: "Não", result: "A dor no peito pode ter várias causas. Consulte um médico para uma avaliação detalhada." }
-    ]
-  },
-
   // COVID
   covid: {
-    question: "Você está com febre?",
+    question: "Você foi diagnosticado com COVID-19, ou você suspeita que já teve ou tem COVID-19?",
     options: [
-      { label: "Sim", next: "questionCovid2" },
-      { label: "Não", result: "Se você não está com febre, é possível que seus sintomas não estejam relacionados ao COVID-19. Consulte um médico para uma avaliação completa." }
-    ]
+      { label: "Sim", next: "covidPositive" },
+      {
+        label: "Não",
+        result:
+          "Se você não está com febre, é possível que seus sintomas não estejam relacionados ao COVID-19. Consulte um médico para uma avaliação completa.",
+      },
+    ],
   },
-  questionCovid2: {
-    question: "Você teve contato com alguém diagnosticado com COVID-19 nos últimos 14 dias?",
+  
+  covidPositive: {
+    question: "Quando e onde você confirmou positivo?",
     options: [
-      { label: "Sim", result: "Recomenda-se procurar um teste para COVID-19 e seguir as orientações das autoridades de saúde." },
-      { label: "Não", result: "Se você não teve contato com alguém diagnosticado, continue monitorando seus sintomas e consulte um médico se necessário." }
-    ]
+      { label: "Eu suspeito que tive.", result: "Consulte um médico para avaliação." },
+      {
+        label: "Eu testei positivo no teste de coleta nasal.",
+        next: "covidPositiveNasalTest",
+      },
+      {
+        label: "Eu testei positivo no teste sanguíneo.",
+        result: "Continue monitorando sua saúde.",
+      },
+      {
+        label: "Eu testei positivo no teste de saliva.",
+        result: "Continue monitorando sua saúde.",
+      },
+      {
+        label: "Estou tendo sintomas atualmente e estou aguardando um teste.",
+        result: "Aguarde o resultado do teste e siga as orientações médicas.",
+      },
+    ],
   },
-
-  // HIPERTENSÃO
-  hipertensao: {
-    question: "Você tem histórico de pressão alta?",
+  
+  covidPositiveNasalTest: {
+    question: "Como você confirmou que não está mais doente?",
     options: [
-      { label: "Sim", next: "questionHipertensao2" },
-      { label: "Não", result: "Se você não tem histórico de pressão alta, é possível que seus sintomas não estejam relacionados à hipertensão. Consulte um médico para uma avaliação completa." }
-    ]
+      {
+        label: "Fui diagnosticado negativo por um teste de coleta nasal.",
+        next: "covidNegativeNasalTest",
+      },
+      { label: "Apresentei anticorpos em um teste sanguíneo.", result: "Continue monitorando sua saúde." },
+      {
+        label: "Meu médico falou que eu não tenho mais a doença, pois parei de apresentar sintomas.",
+        result: "Continue monitorando sua saúde.",
+      },
+      { label: "Não tenho mais sintomas.", result: "Continue monitorando sua saúde." },
+    ],
   },
-  questionHipertensao2: {
-    question: "Você está sentindo dores de cabeça frequentes?",
+  
+  covidNegativeNasalTest: {
+    question: "Quando você confirmou negativo?",
     options: [
-      { label: "Sim", result: "Dores de cabeça frequentes podem ser um sintoma de hipertensão. Recomenda-se monitorar a pressão arterial e consultar um médico." },
-      { label: "Não", result: "Se você não está sentindo dores de cabeça frequentes, continue monitorando sua saúde e consulte um médico se necessário." }
-    ]
-  }
+      { label: "24 horas atrás", result: "Continue monitorando sua saúde." },
+      { label: "Hoje", result: "Continue monitorando sua saúde." },
+      { label: "10 dias após o teste", result: "Continue monitorando sua saúde." },
+    ],
+  },
 };
 
 let currentQuestion;
@@ -55,17 +68,20 @@ function showQuestion(questionData) {
   const questionContainer = document.getElementById("question-container");
   questionContainer.innerHTML = `
     <p>${questionData.question}</p>
-    ${questionData.options.map(option => `
-      <input type="radio" name="answer" id="${option.label}" value="${option.label}">
+    ${questionData.options.map((option, index) => `
+      <input type="radio" name="answer" id="${option.label}" value="${index}">
       <label for="${option.label}">${option.label}</label><br>
     `).join('')}
-    <button onclick="processAnswer('${questionData.options[0].next}', '${questionData.options[1].result}')">Responder</button>
+    <button onclick="processAnswer()">Responder</button>
   `;
 }
 
-function processAnswer(nextQuestionKey, result) {
+function processAnswer() {
   const selectedAnswer = document.querySelector('input[name="answer"]:checked');
   if (selectedAnswer) {
+    const selectedOption = currentQuestion.options[selectedAnswer.value];
+    const nextQuestionKey = selectedOption.next;
+    const result = selectedOption.result;
     const nextQuestion = nextQuestionKey ? anamneseData[nextQuestionKey] : null;
     currentQuestion = nextQuestion;
 
