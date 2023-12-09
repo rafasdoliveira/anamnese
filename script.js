@@ -111,8 +111,9 @@ const anamneseData = {
 };
 
 let currentQuestion;
+let userChoices = [];
 
-function showQuestion(questionData) {
+function showQuestionWithChoices(questionData) {
   const questionContainer = document.getElementById("question-container");
   questionContainer.innerHTML = `
     <p>${questionData.question}</p>
@@ -120,30 +121,41 @@ function showQuestion(questionData) {
       <input type="radio" name="answer" id="${option.label}" value="${index}">
       <label for="${option.label}">${option.label}</label><br>
     `).join('')}
-    <button onclick="processAnswer()">Responder</button>
+    <button onclick="processAnswerWithChoices()">Responder</button>
   `;
 }
 
-function processAnswer() {
+function processAnswerWithChoices() {
   const selectedAnswer = document.querySelector('input[name="answer"]:checked');
   if (selectedAnswer) {
     const selectedOption = currentQuestion.options[selectedAnswer.value];
+    userChoices.push({ question: currentQuestion.question, answer: selectedOption.label });
+
     const nextQuestionKey = selectedOption.next;
     const result = selectedOption.result;
     const nextQuestion = nextQuestionKey ? anamneseData[nextQuestionKey] : null;
     currentQuestion = nextQuestion;
 
     if (nextQuestion) {
-      showQuestion(nextQuestion);
+      showQuestionWithChoices(nextQuestion);
     } else {
       alert(result); // Exibir resultado final
+      displayUserChoices();
     }
   } else {
     alert("Por favor, selecione uma resposta.");
   }
 }
 
+function displayUserChoices() {
+  const choicesContainer = document.getElementById("user-choices-container");
+  choicesContainer.innerHTML = "<h2>Escolhas do Usuário:</h2>";
+  userChoices.forEach(choice => {
+    choicesContainer.innerHTML += `<p><strong>${choice.question}</strong>: ${choice.answer}</p>`;
+  });
+}
+
 function iniciarAnamnese(doenca) {
   currentQuestion = anamneseData[doenca];
-  showQuestion(currentQuestion);
+  showQuestionWithChoices(currentQuestion);
 }
