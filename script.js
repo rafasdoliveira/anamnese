@@ -61,6 +61,53 @@ const anamneseData = {
     ],
   },
 
+// poliomielite
+      poliomielite: {
+          question: "Você sentiu febre?",
+          options: [
+            { label: "Sim", next: "poliomielite2" },
+            {
+              label: "Não",
+              result: "poliomielite2"
+            },
+          ],
+        },
+        
+        poliomielite2: {
+          question: "Você sentiu dores no estomâgo?",
+          options: [
+            { label: "Sim", next: "poliomielite3" },
+            {
+              label: "Não",
+              result: "Continue monitorando sua saúde."
+
+            },
+          ],
+        },
+
+        poliomielite3: {
+          question: "Você teve espasmos musculares?",
+          options: [
+            { label: "Sim", next: "poliomielite4" },
+            {
+              label: "Não",
+              result: "Continue monitorando sua saúde."
+
+            },
+          ],
+        },
+        poliomielite4: {
+          question: "Você sentiu rigidez no pescoço?",
+          options: [
+            { label: "Sim", result: "você tem sintomas semelhantes aos da poliomielite. Consulte um médico para avaliação completa." },
+            {
+              label: "Não",
+              result: "Continue monitorando sua saúde."
+
+            },
+          ],
+        },
+
   // AEDES
   aedes: {
     question: "Sentiu febre nos últimos dias?",
@@ -109,6 +156,8 @@ const anamneseData = {
     }
 
 };
+
+
 
 let currentQuestion;
 let userChoices = [];
