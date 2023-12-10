@@ -1,0 +1,82 @@
+// script.js
+const anamneseData = {
+  // Adicione aqui o conteúdo anterior do script.js
+
+  // EBOLA
+  ebola: {
+    question: "Você esteve em uma área afetada pelo vírus Ebola nos últimos 21 dias?",
+    options: [
+      { label: "Sim", next: "ebolaAffectedArea" },
+      { label: "Não", result: "Provavelmente você não foi exposto ao vírus Ebola. Continue monitorando sua saúde." },
+    ],
+  },
+
+  ebolaAffectedArea: {
+    question: "Você teve contato próximo com alguém que foi diagnosticado com Ebola?",
+    options: [
+      { label: "Sim", result: "É importante procurar ajuda médica imediatamente. O contato próximo com uma pessoa infectada pelo vírus Ebola é um risco significativo para a saúde." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se desenvolver sintomas como febre, vômitos, dor abdominal, entre outros, procure ajuda médica imediatamente." },
+    ],
+  },
+
+  ebolaSymptoms: {
+    question: "Você está apresentando algum dos seguintes sintomas?",
+    options: [
+      { label: "Febre alta", next: "ebolaFever" },
+      { label: "Dor de cabeça intensa", next: "ebolaHeadache" },
+      { label: "Vômitos persistentes", next: "ebolaVomiting" },
+      { label: "Dor muscular intensa", next: "ebolaMusclePain" },
+      { label: "Diarreia severa", next: "ebolaDiarrhea" },
+    ],
+  },
+
+  ebolaFever: {
+    question: "Qual é a sua temperatura corporal atual?",
+    options: [
+      { label: "38.0°C a 38.9°C", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+      { label: "39.0°C a 39.9°C", result: "Procure ajuda médica imediatamente." },
+      { label: "40.0°C ou mais", result: "Procure ajuda médica imediatamente." },
+      { label: "Não sei", result: "Meça sua temperatura e, se estiver alta, procure ajuda médica imediatamente." },
+    ],
+  },
+
+  ebolaHeadache: {
+    question: "A dor de cabeça é acompanhada por rigidez do pescoço?",
+    options: [
+      { label: "Sim", result: "Procure ajuda médica imediatamente." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+    ],
+  },
+
+  ebolaVomiting: {
+    question: "Você está conseguindo manter líquidos para evitar desidratação?",
+    options: [
+      { label: "Sim", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+      { label: "Não", result: "Procure ajuda médica imediatamente para evitar desidratação grave." },
+    ],
+  },
+
+  ebolaMusclePain: {
+    question: "A dor muscular é intensa e incapacitante?",
+    options: [
+      { label: "Sim", result: "Procure ajuda médica imediatamente." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+    ],
+  },
+
+  ebolaDiarrhea: {
+    question: "A diarreia é persistente e grave?",
+    options: [
+      { label: "Sim", result: "Procure ajuda médica imediatamente." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+    ],
+  },
+
+  ebolaContactHealthcare: {
+    question: "Você já procurou ajuda médica para esses sintomas?",
+    options: [
+      { label: "Sim, já procurei ajuda médica", result: "Continue seguindo as orientações do profissional de saúde." },
+      { label: "Não, ainda não procurei ajuda médica", result: "É altamente recomendável procurar ajuda médica imediatamente para avaliação e tratamento adequados." },
+    ],
+  },
+};
