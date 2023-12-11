@@ -76,34 +76,41 @@ const anamneseData = {
         poliomielite2: {
           question: "Você sentiu dores no estomâgo?",
           options: [
-            { label: "Sim", next: "poliomielite3" },
-            {
-              label: "Não",
-              result: "Continue monitorando sua saúde."
-
-            },
+            { label:"Sim, senti dores intensas", next: "poliomielite4" },
+            {label: "Sim, senti dores leves", next: "poliomielite3"},
+            {label: "Não senti dores.",result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa."
+          },
           ],
         },
 
         poliomielite3: {
-          question: "Você teve espasmos musculares?",
+          question: "Você teve espasmos frequentes?",
           options: [
-            { label: "Sim", next: "poliomielite4" },
+            { label: "Sim", next: "poliomielite3_1" },
             {
               label: "Não",
-              result: "Continue monitorando sua saúde."
+              result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa."
 
             },
           ],
         },
-        poliomielite4: {
-          question: "Você sentiu rigidez no pescoço?",
+        poliomielite3_1: {
+          question: "Qual a intensidade de dor dos espamos?",
           options: [
-            { label: "Sim", result: "você tem sintomas semelhantes aos da poliomielite. Consulte um médico para avaliação completa." },
+            { label: "Leve", next: "poliomielite4" },
+            { label: "Moderada", next: "poliomielite4" },
+            { label: "Alta", next: "poliomielite4"
+            },
+          ],
+        },
+        poliomielite4: {
+          question: "Você sentiu rigidez no pescoço ou paralisia no corpo?",
+          options: [
+            { label: "Sim, tive paralisias no corpo.", result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa." },
+            { label: "Sim, tive rigidez na nuca.", result: "Você tem sintomas semelhantes aos da poliomielite. Consulte um médico para avaliação completa." },
+            { label: "Sim, tive paralisia no corpo e rigidez no pescoço.", result: "Você tem sintomas semelhantes aos da poliomielite. Consulte um médico para avaliação completa." },
             {
-              label: "Não",
-              result: "Continue monitorando sua saúde."
-
+              label: "Não senti nenhuma desses sintomas.", result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa."
             },
           ],
         },
