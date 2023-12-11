@@ -223,7 +223,7 @@ const anamneseData = {
       if (nextQuestion) {
         showQuestionWithChoices(nextQuestion);
       } else {
-        alert(result); // Exibir resultado final
+        alert(result); 
         displayUserChoices();
       }
     } else {

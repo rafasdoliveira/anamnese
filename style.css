@@ -26,8 +26,8 @@ p {
 }
 
 button, .back-index {
-  width: 300px; /* Alteração para largura total */
-  max-width: 300px; /* Limita a largura máxima */
+  width: 300px; 
+  max-width: 300px; 
   padding: 10px 20px;
   margin: 0.3rem;
   border: none;
@@ -56,8 +56,8 @@ button {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 100%; /* Alteração para largura total */
-  max-width: 400px; /* Limita a largura máxima */
+  width: 100%; 
+  max-width: 400px; 
   text-align: center;
 }
 
@@ -91,7 +91,7 @@ input[type="radio"]:checked + label {
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f0f8ff; /* AliceBlue */
+  background-color: #f0f8ff; 
 }
 
 .tree {
@@ -128,7 +128,7 @@ input[type="radio"]:checked + label {
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f0f8ff; /* AliceBlue */
+  background-color: #f0f8ff; 
 }
 
 .tree-node {
