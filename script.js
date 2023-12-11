@@ -65,19 +65,20 @@ const anamneseData = {
   aedes: {
     question: "Sentiu febre nos últimos dias?",
     options: [
-      { label: "Sim", 
-      next: "aedesFeverPositive" 
+      { label: "Sim", next: "aedesFeverPositive" },
+      {
+        label: "Não",
+        result: "Provavelmente você não foi contaminado com nenhuma doença transmitida pelo AEDES. Continue monitorando sua saúde",
       },
-      { label: "Não", result: "Provavelmente você não foi contaminado com nenhuma doença transmitida pelo AEDES. Continue monitorando sua saúde" },
     ],
   },
 
   aedesFeverPositive: {
-  question: "Qual a intensidade de febre você sentiu?",
+    question: "Qual a intensidade de febre você sentiu?",
     options: [
-      { 
-        label: "Baixa.", 
-        next: "Provavelmente você não foi contaminado com nenhuma doença transmitida pelo AEDES. Continue monitorando sua saúde." 
+      {
+        label: "Baixa.",
+        next: "aedesLowFeverResult",
       },
       {
         label: "Moderada.",
@@ -90,25 +91,42 @@ const anamneseData = {
     ],
   },
 
+  aedesLowFeverResult: {
+    question: "Você pode ter sido contaminado com alguma doença transmitida pelo AEDES. Continue monitorando sua saúde.",
+    options: [
+      {
+        label: "Dores Musculares e Articulares Leves",
+        result: "Continue monitorando sua saúde. Caso os sintomas persistam ou piorarem, procure um médico.",
+      },
+      {
+        label: "Outros sintomas leves",
+        result: "Continue monitorando sua saúde. Caso os sintomas persistam ou piorarem, procure um médico.",
+      },
+      {
+        label: "Sem outros sintomas relevantes",
+        result: "Continue monitorando sua saúde.",
+      },
+    ],
+  },
+
   dengueOrChikungunya: {
     question: "Sentiu dores?",
-      options: [
-        { 
-          label: "Sim, senti dor atrás dos olhos", 
-          result: "Você pode ter sido contaminado com Dengue. Procure uma Unidade de Saúde" 
-        },
-        {
-          label: "Sim, sinto dores articulares intensas há meses",
-          result: "Você pode ter sido contaminado com Chikungunya. Procure uma Unidade de Saúde",
-        },
-        {
-          label: "Não senti dores",
-          result: "Continue monitorando sua saúde.",
-        },
-      ],
-    }
-
-};
+    options: [
+      {
+        label: "Sim, senti dor atrás dos olhos",
+        result: "Você pode ter sido contaminado com Dengue. Procure uma Unidade de Saúde",
+      },
+      {
+        label: "Sim, sinto dores articulares intensas há meses",
+        result: "Você pode ter sido contaminado com Chikungunya. Procure uma Unidade de Saúde",
+      },
+      {
+        label: "Não senti dores",
+        result: "Continue monitorando sua saúde.",
+      },
+    ],
+  },
+}
 
 let currentQuestion;
 let userChoices = [];
@@ -149,7 +167,7 @@ function processAnswerWithChoices() {
 
 function displayUserChoices() {
   const choicesContainer = document.getElementById("user-choices-container");
-  choicesContainer.innerHTML = "<h2>Escolhas do Usuário:</h2>";
+  choicesContainer.innerHTML = "<h2>Suas Escolhas:</h2>";
   userChoices.forEach(choice => {
     choicesContainer.innerHTML += `<p><strong>${choice.question}</strong>: ${choice.answer}</p>`;
   });

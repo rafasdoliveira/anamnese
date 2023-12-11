@@ -18,12 +18,33 @@
         Não subestime o zumbido! O Aedes aegypti traz consigo riscos sérios.
         Proteja-se, elimine criadouros e combata a dengue, zika e chikungunya.
     </p>
+    <form>
+      <h2>Febre:</h2>
+      <input type="radio" name="febre" value="baixa">Baixa<br>
+      <input type="radio" name="febre" value="moderada">Moderada<br>
+      <input type="radio" name="febre" value="alta">Alta<br>
+
+      <h2>Dores Musculares e Articulares:</h2>
+      <input type="radio" name="dores" value="intensas"> Intensas como "Quebra Ossos"<br>
+      <input type="radio" name="dores" value="presentes"> Presentes mas não tão intensas<br>
+      <input type="radio" name="dores" value="incomodo"> Incomodo principal com dores nas articulações sendo intensas e persistentes<br>
+
+      <h2>Outros Sintomas:</h2>
+      <input type="checkbox" name="outros[]" value="dores_persistentes"> Dores persistentes por vários dias<br>
+      <input type="checkbox" name="outros[]" value="conjuntivite"> Conjuntivite<br>
+      <input type="checkbox" name="outros[]" value="edema"> Edema nas articulações<br>
+      
     <button onclick="iniciarAnamnese('aedes')">Iniciar Anamnese</button>
     <a href="index.html"><button class="back-index">Voltar para o início</button></a>
 </div>
 
-<div id="question-container"></div>
-<div id="user-choices-container"></div>
+<div id="question-container">
+  <!-- Aqui será inserido dinamicamente o conteúdo das perguntas -->
+</div>
+
+<div id="user-choices-container">
+  <!-- Aqui será inserido dinamicamente o conteúdo dos botões de escolha -->
+</div>
 
 <script src="script.js"></script>
 
