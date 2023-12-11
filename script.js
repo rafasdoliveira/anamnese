@@ -68,7 +68,7 @@ const anamneseData = {
             { label: "Sim", next: "poliomielite2" },
             {
               label: "Não",
-              result: "poliomielite2"
+              next: "poliomielite2"
             },
           ],
         },
