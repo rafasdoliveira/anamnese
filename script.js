@@ -61,72 +61,140 @@ const anamneseData = {
     ],
   },
 
-  // AEDES
-  aedes: {
-    question: "Sentiu febre nos últimos dias?",
+// poliomielite
+      poliomielite: {
+          question: "Você sentiu febre?",
+          options: [
+            { label: "Sim", next: "poliomielite2" },
+            {
+              label: "Não",
+              next: "poliomielite2"
+            },
+          ],
+        },
+        
+        poliomielite2: {
+          question: "Você sentiu dores no estomâgo?",
+          options: [
+            { label:"Sim, senti dores intensas", next: "poliomielite4" },
+            {label: "Sim, senti dores leves", next: "poliomielite3"},
+            {label: "Não senti dores.",result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa."
+          },
+          ],
+        },
+
+        poliomielite3: {
+          question: "Você teve espasmos frequentes?",
+          options: [
+            { label: "Sim", next: "poliomielite3_1" },
+            {
+              label: "Não",
+              result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa."
+
+            },
+          ],
+        },
+        poliomielite3_1: {
+          question: "Qual a intensidade de dor dos espamos?",
+          options: [
+            { label: "Leve", next: "poliomielite4" },
+            { label: "Moderada", next: "poliomielite4" },
+            { label: "Alta", next: "poliomielite4"
+            },
+          ],
+        },
+        poliomielite4: {
+          question: "Você sentiu rigidez no pescoço ou paralisia no corpo?",
+          options: [
+            { label: "Sim, tive paralisias no corpo.", result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa." },
+            { label: "Sim, tive rigidez na nuca.", result: "Você tem sintomas semelhantes aos da poliomielite. Consulte um médico para avaliação completa." },
+            { label: "Sim, tive paralisia no corpo e rigidez no pescoço.", result: "Você tem sintomas semelhantes aos da poliomielite. Consulte um médico para avaliação completa." },
+            {
+              label: "Não senti nenhuma desses sintomas.", result: "Provalmente você não está com Poliomielite. Consulte um médico para avaliação completa."
+            },
+          ],
+        },
+  // EBOLA
+  ebola: {
+    question: "Você esteve em uma área afetada pelo vírus Ebola nos últimos 21 dias?",
     options: [
-      { label: "Sim", next: "aedesFeverPositive" },
-      {
-        label: "Não",
-        result: "Provavelmente você não foi contaminado com nenhuma doença transmitida pelo AEDES. Continue monitorando sua saúde",
-      },
+      { label: "Sim", next: "ebolaAffectedArea" },
+      { label: "Não", result: "Provavelmente você não foi exposto ao vírus Ebola. Continue monitorando sua saúde." },
     ],
   },
 
-  aedesFeverPositive: {
-    question: "Qual a intensidade de febre você sentiu?",
+  ebolaAffectedArea: {
+    question: "Você teve contato próximo com alguém que foi diagnosticado com Ebola?",
     options: [
-      {
-        label: "Baixa.",
-        next: "aedesLowFeverResult",
-      },
-      {
-        label: "Moderada.",
-        next: "zika",
-      },
-      {
-        label: "Alta.",
-        next: "dengueOrChikungunya",
-      },
+      { label: "Sim", next: "ebolaSymptoms" },
+      { label: "Não", result: "Continue monitorando sua saúde. Se desenvolver sintomas como febre, vômitos, dor abdominal, entre outros, procure ajuda médica imediatamente." },
     ],
   },
 
-  aedesLowFeverResult: {
-    question: "Você pode ter sido contaminado com alguma doença transmitida pelo AEDES. Continue monitorando sua saúde.",
+  ebolaSymptoms: {
+    question: "Você está apresentando algum dos seguintes sintomas?",
     options: [
-      {
-        label: "Dores Musculares e Articulares Leves",
-        result: "Continue monitorando sua saúde. Caso os sintomas persistam ou piorarem, procure um médico.",
-      },
-      {
-        label: "Outros sintomas leves",
-        result: "Continue monitorando sua saúde. Caso os sintomas persistam ou piorarem, procure um médico.",
-      },
-      {
-        label: "Sem outros sintomas relevantes",
-        result: "Continue monitorando sua saúde.",
-      },
+      { label: "Febre alta", next: "ebolaFever" },
+      { label: "Dor de cabeça intensa", next: "ebolaHeadache" },
+      { label: "Vômitos persistentes", next: "ebolaVomiting" },
+      { label: "Dor muscular intensa", next: "ebolaMusclePain" },
+      { label: "Diarreia severa", next: "ebolaDiarrhea" },
     ],
   },
 
-  dengueOrChikungunya: {
-    question: "Sentiu dores?",
+  ebolaFever: {
+    question: "Qual é a sua temperatura corporal atual?",
     options: [
-      {
-        label: "Sim, senti dor atrás dos olhos",
-        result: "Você pode ter sido contaminado com Dengue. Procure uma Unidade de Saúde",
-      },
-      {
-        label: "Sim, sinto dores articulares intensas há meses",
-        result: "Você pode ter sido contaminado com Chikungunya. Procure uma Unidade de Saúde",
-      },
-      {
-        label: "Não senti dores",
-        result: "Continue monitorando sua saúde.",
-      },
+      { label: "38.0°C a 38.9°C", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+      { label: "39.0°C a 39.9°C", result: "Procure ajuda médica imediatamente." },
+      { label: "40.0°C ou mais", result: "Procure ajuda médica imediatamente." },
+      { label: "Não sei", result: "Meça sua temperatura e, se estiver alta, procure ajuda médica imediatamente." },
     ],
   },
-}
+
+  ebolaHeadache: {
+    question: "A dor de cabeça é acompanhada por rigidez do pescoço?",
+    options: [
+      { label: "Sim", result: "Procure ajuda médica imediatamente." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+    ],
+  },
+
+  ebolaVomiting: {
+    question: "Você está conseguindo manter líquidos para evitar desidratação?",
+    options: [
+      { label: "Sim", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+      { label: "Não", result: "Procure ajuda médica imediatamente para evitar desidratação grave." },
+    ],
+  },
+
+  ebolaMusclePain: {
+    question: "A dor muscular é intensa e incapacitante?",
+    options: [
+      { label: "Sim", result: "Procure ajuda médica imediatamente." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+    ],
+  },
+
+  ebolaDiarrhea: {
+    question: "A diarreia é persistente e grave?",
+    options: [
+      { label: "Sim", result: "Procure ajuda médica imediatamente." },
+      { label: "Não", result: "Continue monitorando sua saúde. Se os sintomas persistirem, procure ajuda médica." },
+    ],
+  },
+
+  ebolaContactHealthcare: {
+    question: "Você já procurou ajuda médica para esses sintomas?",
+    options: [
+      { label: "Sim, já procurei ajuda médica", result: "Continue seguindo as orientações do profissional de saúde." },
+      { label: "Não, ainda não procurei ajuda médica", result: "É altamente recomendável procurar ajuda médica imediatamente para avaliação e tratamento adequados." },
+    ],
+  },
+};
+
+
+
 
 let currentQuestion;
 let userChoices = [];
